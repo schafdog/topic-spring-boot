@@ -38,7 +38,7 @@
 		<tr>
     	<tr th:each="topic : ${topics}">
     		<td th:text="${topic.id}" />
-	    	<td th:text="${topic.topic}" />
+	    	<td th:text="${topic.title}" />
     		<td th:text="${topic.email}" />
 	    	<td th:text="${topic.body}" />
 	    	<td><a th:href="@{/topic/{id}/reply/(id=${topic.id})}">Reply</a></td>
