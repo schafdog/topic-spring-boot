@@ -1,13 +1,32 @@
 package com.schafroth.app.topic;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity 
 public class TopicReply {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
-	private Topic topic;
 	private String email;
 	private String reply;
-	private long topicId;
+    @ManyToOne
+    @JoinColumn(name = "topic_id")
+	private Topic topic;
+
+	public TopicReply() {
+    };
+
+    public TopicReply(String email, String reply, Topic topic) {
+    	this.email = email;
+    	this.reply = reply;
+    	this.topic = topic;
+    };
 
     public long getId() {
         return id;
@@ -23,14 +42,6 @@ public class TopicReply {
 
 	public Topic getTopic() {
 		return topic;
-	}
-
-	public long getTopicId() {
-		return topicId;
-	}
-
-	public void setTopicId(long id) {
-		this.topicId = id;
 	}
 
     public String getReply() {

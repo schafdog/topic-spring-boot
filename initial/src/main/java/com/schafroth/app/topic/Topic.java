@@ -1,18 +1,31 @@
 package com.schafroth.app.topic;
 
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity 
 public class Topic {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-	private String topic;
 	private String email;
 	private String body;
+	private String title;
+	@OneToMany(targetEntity=TopicReply.class, mappedBy="topic", fetch=FetchType.EAGER)
+	private Set<TopicReply> replies;
 
 	public Topic() {
 	}
 
-	public Topic(int id, String topic, String email, String body) {
-		this.id = id;
-		this.topic = topic;
+	public Topic(String topic, String email, String body) {
+		this.title = topic;
 		this.email = email;
 		this.body = body;
 	}
@@ -25,12 +38,12 @@ public class Topic {
         this.id = id;
     }
 
-	public String getTopic() {
-		return topic;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTopic(String topic) {
-		this.topic = topic;
+	public void setTitle(String topic) {
+		this.title = topic;
 	}
 
     public String getBody() {
@@ -48,4 +61,13 @@ public class Topic {
 	public void setEmail(String sender) {
 		this.email = sender;
 	}
+	
+    public Set<TopicReply> getTopicReplies() {
+        return replies;
+    }
+
+    public void setTopicReplies(Set<TopicReply> replies) {
+    	this.replies = replies;
+    }
+
 }
