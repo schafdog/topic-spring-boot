@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+
+#topics {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#topics td, #topics th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#topics tr:nth-child(even){background-color: #f2f2f2;}
+
+#topics tr:hover {background-color: #ddd;}
+
+#topics th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+	<h1>Topics</h1>
+	<table id="topics">
+		<tr>
+		<th>Id</th><th>Topic</th><th>Email</th><th>Body</th><th>Reply</th>
+		<tr>
+    	<tr th:each="topic : ${topics}">
+    		<td th:text="${topic.id}" />
+	    	<td th:text="${topic.topic}" />
+    		<td th:text="${topic.email}" />
+	    	<td th:text="${topic.body}" />
+	    	<td><a th:href="@{/topic/{id}/reply/(id=${topic.id})}">Reply</a></td>
+	    </tr>
+	</table>
+    <a href="/topic/new">New Topic</a>
+</body>
+</html>
