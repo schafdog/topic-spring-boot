@@ -49,4 +49,8 @@ public class ReplyEmail {
 		this.topic = topic;
 	}
 
+	public String toString() {
+		return String.format("ReplyEmail(topic=%s, sender=%s, reply=%s, reciever=%s)", 
+				topic, sender, reply, reciever);
+	}
 }
