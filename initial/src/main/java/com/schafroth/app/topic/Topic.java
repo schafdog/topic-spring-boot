@@ -70,4 +70,15 @@ public class Topic {
     	this.replies = replies;
     }
 
+    public boolean equals(Object object) {
+    	if (object instanceof Topic) {
+    		Topic other = (Topic) object;
+    		if (!replies.equals(other.replies))
+    			return false;
+    		return  other.body.equals(body) && 
+    				other.email.equals(email) && 
+    				other.title.equals(title);
+    	}
+    	return super.equals(object);
+    }
 }

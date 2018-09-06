@@ -60,4 +60,15 @@ public class TopicReply {
 	public void setEmail(String sender) {
 		this.email = sender;
 	}
+
+	public boolean equals(Object object) {
+    	if (object instanceof TopicReply) {
+    		TopicReply other = (TopicReply) object;
+    		return  other.reply.equals(reply) && 
+    				other.email.equals(email) && 
+    				other.topic.getId() == topic.getId();
+    	}
+    	return super.equals(object);
+	}
+
 }
