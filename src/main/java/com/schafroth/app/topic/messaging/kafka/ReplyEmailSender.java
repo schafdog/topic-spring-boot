@@ -7,6 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 //@Component
+@SuppressWarnings("unused")
 public class ReplyEmailSender {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ReplyEmailSender.class);
