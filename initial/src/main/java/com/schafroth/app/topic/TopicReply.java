@@ -15,9 +15,10 @@ public class TopicReply {
     private long id;
 	private String email;
 	private String reply;
+
     @ManyToOne
     @JoinColumn(name = "topic_id")
-	private Topic topic;
+    private Topic topic;
 
 	public TopicReply() {
     };

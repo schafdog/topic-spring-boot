@@ -1,9 +1,8 @@
 package com.schafroth.app.topic;
 
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,16 +69,24 @@ public class TopicController {
     	return "redirect:/topic";
     }
 
+	@Autowired
+	private ReplyEmailSender sender;
+	
 	private void emailReply(TopicReply reply, Topic topic) {
-		Set<String> emailSet = new LinkedHashSet<String>();
-		// Only add reply if not our topic owner
+		// ensure we do not send out messages repeated message by adding to a Set
+		Set<String> emails = new HashSet<String>();
+
+		// Only add if not from topic owner
 		if (!topic.getEmail().equals(reply.getEmail()))
-			emailSet.add(topic.getEmail());
-		
+			emails.add(topic.getEmail());
+		// Only add if not from reply owner
 		for (TopicReply aReply : topic.getTopicReplies()) {
 			if (!aReply.getEmail().equals(reply.getEmail()))
-				emailSet.add(aReply.getEmail());
+				emails.add(aReply.getEmail());
 		}
-		logger.info("Simulate sending reply (" + reply.getReply() + ") from '" + reply.getEmail() + "' to " + Strings.join(emailSet, ','));
+		
+		for (String email : emails) {
+			sender.send(new ReplyEmail(reply, email));
+		}
 	}
 }
