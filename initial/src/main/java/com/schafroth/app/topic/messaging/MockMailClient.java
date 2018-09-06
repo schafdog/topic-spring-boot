@@ -5,13 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.schafroth.app.topic.ReplyEmail;
 
 @Component
-@Profile("!Step6")
 public class MockMailClient implements MailClient {
 
 	@Override
