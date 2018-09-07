@@ -1,8 +1,11 @@
 FROM openjdk:8-jdk-alpine
-VOLUME /tmp
+RUN apk add --no-cache procps
 
+VOLUME /tmp
 ENV JAVA_OPTS=""
 ENV SPRING_PROFILE="Step6"
+COPY ./. /
+RUN ./mvnw -DskipTests package
 ADD target/*.jar app.jar
 
 ENTRYPOINT exec java $JAVA_OPTS \
