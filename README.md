@@ -18,7 +18,5 @@ Run without spring profile "Step6" to use this implementation
 Step 6 was implemented using JMS messages and using a embedded ActiveMQ. The class ReplyEmailSenderJMS 
 also implements the above interface. Using spring profile "Step6" will enable this. 
 
-I will have the application running on my own servers.
-
-b
+I will have the application running in my own kubernetes cluster.
 
