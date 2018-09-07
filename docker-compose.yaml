@@ -1,0 +1,14 @@
+version: '2'
+services:
+  topic-spring-boot:
+    build: ./
+    image: schafdog/topic-spring-boot
+    container_name: topic-spring-boot
+    restart: always
+    network_mode: bridge
+    ports:
+      - 8090:8090/tcp
+    volumes:
+      - /tmp:/tmp
+
+
