@@ -10,5 +10,7 @@ services:
       - 8090:8090/tcp
     volumes:
       - /tmp:/tmp
+    extra_hosts:
+      - "nuc.schafroth:10.0.0.16"
 
 
