@@ -3,20 +3,32 @@ package com.schafroth.app.topic;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 import junit.framework.TestCase;
 
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class ApplicationTest extends TestCase {
 	
-	/* Implement */
+	@Autowired
+	private MockMvc mvc;
 	
 	@Autowired
 	private TopicRepository topicRepository;
 	@Autowired
 	private TopicReplyRepository topicReplyRepository;
 
-	public void init(String... strings) throws Exception {
+	@Test
+	public void testPersist() throws Exception {
 		// save a couple of categories
 		Set<Topic> topics = new HashSet<Topic>();
 		
@@ -41,15 +53,11 @@ public class ApplicationTest extends TestCase {
 			topics.add(topic);
 		}
 
-		// fetch all topics
-		int count = 0;
-		for (Topic aTopic : topicRepository.findAll()) {
+		// See if all topics are in repo
+		for (Topic aTopic : topics) {
 			Application.logger.info(aTopic.toString());
-			assertTrue("Missing topic", topics.contains(aTopic));
-			count++;
+			assertTrue("Missing topic", topicRepository.existsById(aTopic.getId()));
+			topicRepository.delete(aTopic);
 		}
-		assertTrue("Wrong number of topics", topics.size() == count);
 	}
-
-
 }
