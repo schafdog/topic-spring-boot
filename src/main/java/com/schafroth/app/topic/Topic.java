@@ -1,5 +1,6 @@
 package com.schafroth.app.topic;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -80,5 +81,9 @@ public class Topic {
     				other.title.equals(title);
     	}
     	return super.equals(object);
+    }
+    
+    public int hashCode() {
+    	return Objects.hash(id);
     }
 }

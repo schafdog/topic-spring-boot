@@ -1,5 +1,7 @@
 package com.schafroth.app.topic;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -69,6 +71,10 @@ public class TopicReply {
     				other.topic.getId() == topic.getId();
     	}
     	return super.equals(object);
+	}
+	
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 
 }
